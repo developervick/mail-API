@@ -1,2 +1,2 @@
 # mail-API
-Integration of Mail API
+Integration of Mail API in Frontend
