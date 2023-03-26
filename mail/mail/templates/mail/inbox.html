@@ -8,11 +8,34 @@
     <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
     <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
     <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <button class="btn btn-sm btn-outline-primary" id="display-button">Display</button>
     <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
     <hr>
 
+    
+
     <div id="emails-view">
+        <div id="mail-list">
+        
+        </div>
+
+        // diplaying mail
+        <div id="display-mail">
+            <div><strong>From:</strong><div id="from"></div></div>
+            <div><strong>To:</strong><div id="to"></div></div>
+            <div><strong>Subject:</strong><div id="subject"></div></div>
+            <div><strong>Timestamp:</strong><div id="timestamp"></div></div>
+
+            <button class="btn btn-sm btn-outline-primary" id="reply">Reply</button>
+            <hr>
+            <p id="mail-body"></p>
+
+            
+        </div>
     </div>
+    
+    
+    <h3 id="message"></h3>
 
     <div id="compose-view">
         <h3>New Email</h3>
@@ -27,7 +50,7 @@
                 <input class="form-control" id="compose-subject" placeholder="Subject">
             </div>
             <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
-            <input type="submit" class="btn btn-primary"/>
+            <input id="submit" type="submit" class="btn btn-primary"/>
         </form>
     </div>
 {% endblock %}
