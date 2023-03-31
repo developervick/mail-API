@@ -1,62 +1,83 @@
-import React from "react";
+import React, { Component, useRef, useState } from "react";
 import * as util from "../utility/utility"
 export { Body }
 
 
-function Body () {
+function Body (props) {
+
+    const [mailState, setMailState] = useState()
+
+    const buttonState = (buttonClicked) => {
+        setMailState(buttonClicked)
+    }
+
     return (
-        <div className="my-2 container column align-items-start">
-            <div className="row gy-5">
-                <Header></Header>
+        <div className="m-0 p-4 container row d-flex">
+            <div className="p-2 column d-flex">
+                <Header userId="userId"></Header>
             </div>
-            <div className="row gy-5">
-                <Navigation></Navigation>
+            <div className="p-2 column d-flex">
+                <Navigation buttonState={buttonState}></Navigation>
             </div>
             <hr></hr>
-            <div className="row gy-5">
-                <Inbox></Inbox>
-            </div>
-            <div className="row gy-5">
-                <MailBody></MailBody>
+            <div className="p-2 column d-flex">
+                <MailBox mailName={mailState}></MailBox>
             </div>
         </div>
     )
 }
-
-function Header () {
+function Header (props) {
     return (
         <div className="d-flex justify-content-start">
-            <util.MainHeading value="update user id"></util.MainHeading>
+            <util.MainHeading text={props.userId}></util.MainHeading>
         </div>
     )
 }
+function Navigation (props) {
 
-function Navigation () {
+    const [value, setValue] = useState('Inbox')   
+
+
     return(
         <div className="d-flex justify-content-start">
-        <util.Button name="Inbox"></util.Button>
-        <util.Button name="Compose"></util.Button>
-        <util.Button name="Sent"></util.Button>
-        <util.Button name="Archive"></util.Button>
-        <util.Button name="Logout"></util.Button>
+        <util.Button onClick={(e) => {props.buttonState(e.target.name)}} name="Inbox"></util.Button>
+        <util.Button onClick={(e) => {props.buttonState(e.target.name)}} name="Compose"></util.Button>
+        <util.Button onClick={(e) => {props.buttonState(e.target.name)}} name="Sent"></util.Button>
+        <util.Button onClick={(e) => {props.buttonState(e.target.name)}} name="Archive"></util.Button>
+        <util.Button onClick={(e) => {props.buttonState(e.target.name)}} name="Logout"></util.Button>
         </div>
     )
+}
+function MailBox (props) {
+
+    switch(props.mailName){
+        case "Compose":
+            return (
+                <div className="row d-flex container justify-content-start">
+                    <div className="column d-flex align-items-center">
+                        <util.SeconderyHeading text={props.mailName}></util.SeconderyHeading>
+                    </div>
+                    <div className="row d-flex justify-items-start">
+                        <util.ComposeForm></util.ComposeForm>
+                    </div>
+                    
+                </div>
+            )
+
+        default:
+            return (
+                <div className="row d-flex container justify-content-start">
+                    <div className="column d-flex align-items-center">
+                        <util.SeconderyHeading text={props.mailName}></util.SeconderyHeading>
+                    </div>
+                    <div className="row d-flex justify-items-start">
+                        <util.mailList sender="sdasv" subject="fvdsfv" timestamp="fvsdv"></util.mailList>
+                    </div>
+                    
+                </div>
+            )
+    }
+
 }
 
-function Inbox () {
-    return (
-        <div className="d-flex justify-content-start">
-            <util.SeconderyHeading value="inbox"></util.SeconderyHeading>
-        </div>
-    )
-}
-
-function MailBody () {
-    return (
-        <div className="p-0">
-            <util.mailList></util.mailList>
-            <util.MailInfo></util.MailInfo>
-        </div>
-    )
-}
 

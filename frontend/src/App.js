@@ -10,7 +10,6 @@ import * as layout from './layout/layout';
 
 function App() {
 
-  const des = "Hey this is the first static react app developerd by developer vick"
 
   return (
     <div className="App">
